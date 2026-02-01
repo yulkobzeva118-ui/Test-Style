@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 Секреты Стилиста Lux 💎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap');
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; margin: 0; padding: 20px; 
+            background: linear-gradient(135deg, #0f0f23 0%, #1a0d2e 50%, #16213e 100%); 
+            color: #e8e8e8; min-height: 100vh; overflow-x: hidden;
+        }
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { 
+            font-family: 'Cinzel', serif; font-size: 3em; font-weight: 700;
+            background: linear-gradient(45deg, #ffd700 0%, #e6c200 30%, #c0a000 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            text-shadow: 0 0 30px rgba(255,215,0,0.6); margin: 0; letter-spacing: 2px;
+        }
+        #score { 
+            font-size: 1.4em; font-weight: 600; 
+            background: linear-gradient(135deg, #d8b4fe 0%, #a78bfa 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; padding: 15px 30px; border-radius: 50px; 
+            display: inline-block; box-shadow: 0 0 20px rgba(216,180,254,0.5);
+            border: 2px solid rgba(216,180,254,0.3);
+        }
+        #story { 
+            background: rgba(15,15,35,0.9); padding: 40px; border-radius: 25px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+            margin-bottom: 40px; font-size: 1.15em; line-height: 1.8; 
+            backdrop-filter: blur(15px); border: 1px solid rgba(255,215,0,0.2);
+        }
+        .tip { 
+            background: linear-gradient(135deg, rgba(6,182,212,0.3) 0%, rgba(216,180,254,0.3) 100%); 
+            padding: 25px; border-radius: 18px; margin: 25px 0; font-style: italic; 
+            border-left: 6px solid #ffd700; box-shadow: 0 5px 20px rgba(6,182,212,0.3);
+            color: #f0f0f0;
+        }
+        #choices { text-align: center; padding: 30px 0; }
+        button { 
+            display: block; margin: 20px auto; 
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 50%, #ffd700 100%); 
+            color: #1a0d2e; border: none; padding: 22px 50px; 
+            border-radius: 60px; cursor: pointer; font-size: 1.15em; font-weight: 600; 
+            min-width: 350px; box-shadow: 
+                0 10px 30px rgba(255,215,0,0.6),
+                0 0 40px rgba(255,215,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+            position: relative; overflow: hidden;
+        }
+        button::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; 
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        button:hover::before { left: 100%; }
+        button:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 15px 40px rgba(255,215,0,0.8), 0 0 60px rgba(255,215,0,0.6);
+        }
+        button:active { transform: translateY(-4px); }
+        @media (max-width: 600px) { 
+            body { padding: 15px; } h1 { font-size: 2.2em; } button { min-width: 320px; padding: 20px 40px; }
+            #story { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>💎 Секреты Стилиста Lux 💎</h1>
+        <p>Нарратив для профи-стиля | Репутация: <span id="score">0</span>/100</p>
+    </header>
+    <div id="story">
+        <strong>✨ Миссия 1: Бизнес-люкс ✨</strong><br><br>
+        Клиентка — CEO на переговоры. База: чёрный костюм, шёлковая блузка, Louboutins. 
+        <br>Твоя задача: добавить изюминку!
+        <div class="tip"><strong>Золотое правило контраста:</strong> Сочетай текстуры — матовое золото + бархат, грубая кожа + шёлк.</div>
+    </div>
+    <div id="choices"></div>
+
+    <script>
+        const game = {
+            score: 0,
+            scenes: {
+                1: {
+                    choices: [
+                        { text: "🌹 Золотой шарф + бирюзовые серьги (+30)", next: 2, score: 30 },
+                        { text: "👜 Сиреневый клатч Hermès (+25)", next: 3, score: 25 },
+                        { text: "👑 Oversize бархатный жакет (+20)", next: 4, score: 20 },
+                        { text: "🎭 Всё сразу (+0)", next: 5, score: 0 }
+                    ]
+                },
+                2: {
+                    text: `💎 Безупречно! Шарф + серьги — люкс-контраст. Эмма: "Ты гений, +30!"<br>
+                    <div class="tip"><strong>Правило "Один акцент":</strong> Золото доминирует, остальное — фон.</div>
+                    <strong>Миссия 2:</strong> Рок-дива на afterparty.`,
+                    choices: [
+                        { text: "🔥 Кожа + сиреневый oversize (+35 → ЛУЧШИЙ ФИНАЛ)", next: 'win', score: 35 },
+                        { text: "🌟 Тотал-глэм (+15)", next: 6, score: 15 }
+                    ]
+                },
+                3: {
+                    text: `👜 Клатч добавил загадочности! +25. Идеальный баланс.<br>
+                    <div class="tip"><strong>Цветовой круг:</strong> Сиреневый комплиментирует тёмные тона.</div>`,
+                    choices: [{ text: "▶️ Миссия 2 (+25)", next: 2, score: 25 }]
+                },
+                4: {
+                    text: `👑 Бархат — королевский выбор! +20.<br>
+                    <div class="tip"><strong>Текстурный баланс:</strong> Объём + стройность.</div>`,
+                    choices: [{ text: "▶️ Продолжаем (+20)", next: 2, score: 20 }]
+                },
+                5: {
+                    text: `😬 Хаос! Эмма: "Менее — значит больше." +0.`,
+                    choices: [{ text: "🔄 Рестарт", next: 1, score: 0 }]
+                },
+                6: {
+                    text: `🌟 Глэм яркий, но без фокуса. +15. Финал!<br>
+                    <div class="tip"><strong>Свой стиль:</strong> Смешивай золото, сирень, бирюзу лично!</div>`,
+                    choices: [{ text: "💖 Завершить карьеру (+30)", next: 'win2', score: 30 }]
+                },
+                win: { 
+                    text: `👑 ЛУКС-ПОБЕДА! 90+! Ты — главный стилист Хельсинки. Золото твоё!`,
+                    choices: [{ text: "🔄 Новая сессия", next: 1, score: 0 }] 
+                },
+                win2: { 
+                    text: `⭐ Стильная победа! 75+. Будущее за тобой!`,
+                    choices: [{ text: "🔄 Ещё раз", next: 1, score: 0 }] 
+                }
+            },
+            current: 1
+        };
+
+        function showScene(id) {
+            const scene = game.scenes[id];
+            const storyEl = document.getElementById('story');
+            if (scene.text) storyEl.innerHTML = scene.text;
+            const choicesDiv = document.getElementById('choices');
+            choicesDiv.innerHTML = '';
+            scene.choices.forEach((choice) => {
+                const btn = document.createElement('button');
+                btn.innerHTML = choice.text;
+                btn.onclick = () => {
+                    game.score += choice.score;
+                    document.getElementById('score').textContent = Math.max(0, game.score);
+                    showScene(choice.next);
+                    setTimeout(() => window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}), 200);
+                };
+                choicesDiv.appendChild(btn);
+            });
+        }
+        showScene(1);
+    </script>
+</body>
+</html>
